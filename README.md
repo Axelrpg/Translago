@@ -27,6 +27,7 @@ Translago es una aplicación de traducción de texto desarrollada con **React Na
 
    ```bash
    npm install
+   
    // o si prefieres Yarn:
    yarn install
 
