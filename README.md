@@ -1,79 +1,81 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# Translago
 
-# Getting Started
+Translago es una aplicación de traducción de texto desarrollada con **React Native** y **TypeScript**. Permite traducir texto entre una amplia variedad de idiomas utilizando la **API de Google Traductor**. La aplicación presenta una interfaz moderna y accesible gracias a **React Native Paper** y soporta tanto el modo claro como oscuro, dependiendo del tema establecido en el dispositivo.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Características
 
-## Step 1: Start the Metro Server
+- Traducción de texto entre múltiples idiomas.
+- Uso de la API de Google Traductor para una traducción precisa.
+- Interfaz de usuario intuitiva utilizando React Native Paper.
+- Compatibilidad con modo claro y oscuro según la configuración del dispositivo.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+## Requisitos
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **Node.js** (recomendado v14.x o superior)
+- **npm** o **Yarn** para gestionar las dependencias.
+- Cuenta y clave de API de Google Traductor.
 
-```bash
-# using npm
-npm start
+## Instalación
 
-# OR using Yarn
-yarn start
-```
+1. **Clona este repositorio:**
 
-## Step 2: Start your Application
+   ```bash
+   git clone https://github.com/tu-usuario/translago.git
+   cd translago
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+2. **Instala las dependencias:**
 
-### For Android
+   ```bash
+   npm install
+   // o si prefieres Yarn:
+   yarn install
 
-```bash
-# using npm
-npm run android
+3. **Configura la clave de API:**
 
-# OR using Yarn
-yarn android
-```
+   ```bash
+   // config.ts
+   export const API_KEY = 'TU_CLAVE_API';
 
-### For iOS
+4. **Ejecuta la aplicación:**
 
-```bash
-# using npm
-npm run ios
+   ```bash
+   // Para dispositivos Android:
+   npm run android
+   
+   // o si prefieres Yarn:
+   yarn android
+   
+   // Para dispositivos iOS:
+   npm run ios
+   
+   // o con Yarn:
+   yarn ios
 
-# OR using Yarn
-yarn ios
-```
+## Uso
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+1. Abre la aplicación en tu dispositivo o emulador.
+2. Ingresa el texto que deseas traducir.
+3. Selecciona el idioma de origen y el idioma al que deseas traducir.
+4. Presiona el botón de traducción para obtener el resultado.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+## Tecnologías Utilizadas
 
-## Step 3: Modifying your App
+- **React Native:** Framework para construir aplicaciones móviles.
+- **TypeScript:** Lenguaje de programación para escribir código más seguro y mantenible.
+- **Axios:** Cliente HTTP para realizar peticiones a la API de Google Traductor.
+- **React Native Paper:** Componentes de interfaz de usuario adaptativos y accesibles.
 
-Now that you have successfully run the app, let's modify it.
+## Contribuciones
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+Si deseas contribuir al proyecto, por favor sigue estos pasos:
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (**git checkout -b mi-nueva-funcionalidad**).
+3. Realiza tus cambios y haz commit de los mismos (**git commit -m 'Añadida nueva funcionalidad'**).
+4. Sube tus cambios a la rama (**git push origin mi-nueva-funcionalidad**).
+5. Abre un Pull Request en GitHub.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+## Licencia
 
-## Congratulations! :tada:
+Este proyecto está bajo la licencia MIT. Puedes ver más detalles en el archivo LICENSE.
 
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+¡Gracias por usar Translago! Si tienes alguna pregunta o problema, no dudes en abrir un issue en el repositorio.
