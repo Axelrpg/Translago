@@ -20,7 +20,7 @@ Translago es una aplicación de traducción de texto desarrollada con **React Na
 1. **Clona este repositorio:**
 
    ```bash
-   git clone https://github.com/tu-usuario/translago.git
+   git clone https://github.com/Axelrpg/Translago.git
    cd translago
 
 2. **Instala las dependencias:**
@@ -76,6 +76,10 @@ Si deseas contribuir al proyecto, por favor sigue estos pasos:
 
 ## Licencia
 
-Este proyecto está bajo la licencia MIT. Puedes ver más detalles en el archivo LICENSE.
+Este proyecto está bajo la licencia MIT. Puedes ver más detalles en el archivo [LICENSE](https://github.com/Axelrpg/Translago/blob/main/LICENSE).
+
+## Autor
+
+Desarrollado por [Axelrpg](https://github.com/Axelrpg).
 
 ¡Gracias por usar Translago! Si tienes alguna pregunta o problema, no dudes en abrir un issue en el repositorio.
