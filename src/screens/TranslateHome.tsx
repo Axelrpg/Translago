@@ -5,7 +5,7 @@ import { Appbar, Button, Divider, IconButton, Text, TextInput } from 'react-nati
 import { API_KEY } from '../../config';
 import { TranslationInterface } from '../interfaces/TranslationInterface';
 import { darkColors } from '../colors/DarkColors';
-import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/Navigation';
 import { getLanguageCode } from '../helpers/GetLanguageCode';
@@ -92,21 +92,25 @@ export const TranslateHome: React.FC = () => {
 
             <Appbar.Header
                 mode='center-aligned'
+                style={styles.appbarHeader}
             >
                 {
                     keyboardVisible && (
                         <Appbar.BackAction
+                            iconColor={colors.primaryText.color}
                             onPress={() => Keyboard.dismiss()}
                         />
                     )
                 }
                 <Appbar.Content
                     title={'Translago'}
+                    color={colors.primaryText.color}
                 />
                 {
                     text.length > 0 && (
                         <Appbar.Action
                             icon='close'
+                            iconColor={colors.primaryText.color}
                             onPress={() => setText('')}
                         />
                     )
@@ -117,16 +121,16 @@ export const TranslateHome: React.FC = () => {
 
                 <TextInput
                     label={'Enter text to translate'}
+                    value={text}
+                    activeOutlineColor={colors.primaryText.color}
+                    activeUnderlineColor={colors.secondaryBackground.color}
                     mode='outlined'
                     multiline={true}
                     numberOfLines={5}
-                    value={text}
+                    outlineColor={colors.primaryText.color}
                     selectionColor={colors.primaryText.color}
                     textColor={colors.primaryText.color}
                     underlineColor={colors.secondaryBackground.color}
-                    activeUnderlineColor={colors.secondaryBackground.color}
-                    outlineColor={colors.primaryText.color}
-                    activeOutlineColor={colors.primaryText.color}
                     style={{
                         backgroundColor: colors.primaryBackground.color,
                     }}
@@ -149,10 +153,10 @@ export const TranslateHome: React.FC = () => {
 
                 <View style={styles.homeSelectedLanguageContainer}>
                     <Button
-                        mode='contained'
                         labelStyle={{
-                            fontSize: originalLanguage === 'Detect language' ? 10 : 14
+                            fontSize: originalLanguage.length > 12 ? 8 : 15,
                         }}
+                        mode='contained'
                         style={styles.homeSelectedLanguageButton}
                         textColor={colors.primaryText.color}
                         onPress={() => navigation.navigate('Languages', {
@@ -178,6 +182,9 @@ export const TranslateHome: React.FC = () => {
                     />
 
                     <Button
+                        labelStyle={{
+                            fontSize: translatedLanguage.length > 12 ? 8 : 15,
+                        }}
                         mode='contained'
                         style={styles.homeSelectedLanguageButton}
                         textColor={colors.primaryText.color}
@@ -196,7 +203,7 @@ export const TranslateHome: React.FC = () => {
                 {!keyboardVisible && (
                     <IconButton
                         containerColor={colors.primaryBackground.color}
-                        disabled={loading}
+                        disabled={text.length === 0}
                         icon={'translate'}
                         iconColor={colors.primaryText.color}
                         loading={loading}

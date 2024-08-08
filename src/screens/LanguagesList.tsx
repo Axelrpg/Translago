@@ -1,11 +1,14 @@
 import React from 'react';
-import { SafeAreaView, ScrollView, View } from 'react-native';
+import { Appearance, SafeAreaView, ScrollView, View } from 'react-native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/Navigation';
 import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { LanguageListItem } from '../components/LanguageListItem';
 import { styles } from '../styles/Styles';
-import { Appbar } from 'react-native-paper';
+import { Appbar, Searchbar } from 'react-native-paper';
+import { darkColors } from '../colors/DarkColors';
+import { lightColors } from '../colors/LightColors';
+import { lenguagesListNames } from '../helpers/LanguagesListNames';
 
 type LanguagesListRouteProp = RouteProp<RootStackParamList, 'Languages'>;
 type LanguagesListNavigationProp = StackNavigationProp<RootStackParamList, 'Languages'>;
@@ -27,131 +30,86 @@ export const LanguagesList: React.FC<LanguagesListProps> = () => {
         setTranslatedLanguage
     } = params;
 
-    const lenguagesList = [
-        'Afrikaans',
-        'Albanian',
-        'Amharic',
-        'Arabic',
-        'Armenian',
-        'Azerbaijani',
-        'Basque',
-        'Belarusian',
-        'Bengali',
-        'Bosnian',
-        'Bulgarian',
-        'Catalan',
-        'Cebuano',
-        'Chichewa',
-        'Chinese (Simplified)',
-        'Chinese (Traditional)',
-        'Corsican',
-        'Croatian',
-        'Czech',
-        'Danish',
-        'Dutch',
-        'English',
-        'Esperanto',
-        'Estonian',
-        'Filipino',
-        'Finnish',
-        'French',
-        'Frisian',
-        'Galician',
-        'Georgian',
-        'German',
-        'Greek',
-        'Gujarati',
-        'Haitian Creole',
-        'Hausa',
-        'Hawaiian',
-        'Hebrew',
-        'Hindi',
-        'Hmong',
-        'Hungarian',
-        'Icelandic',
-        'Igbo',
-        'Indonesian',
-        'Irish',
-        'Italian',
-        'Japanese',
-        'Javanese',
-        'Kannada',
-        'Kazakh',
-        'Khmer',
-        'Kinyarwanda',
-        'Korean',
-        'Kurdish (Kurmanji)',
-        'Kyrgyz',
-        'Lao',
-        'Latin',
-        'Latvian',
-        'Lithuanian',
-        'Luxembourgish',
-        'Macedonian',
-        'Malagasy',
-        'Malay',
-        'Malayalam',
-        'Maltese',
-        'Maori',
-        'Marathi',
-        'Mongolian',
-        'Myanmar (Burmese)',
-        'Nepali',
-        'Norwegian',
-        'Odia (Oriya)',
-        'Pashto',
-        'Persian',
-        'Polish',
-        'Portuguese',
-        'Punjabi',
-        'Romanian',
-        'Russian',
-        'Samoan',
-        'Scots Gaelic',
-        'Serbian',
-        'Sesotho',
-        'Shona',
-        'Sindhi',
-        'Sinhala',
-        'Slovak',
-        'Slovenian',
-        'Somali',
-        'Spanish',
-        'Sundanese',
-        'Swahili',
-        'Swedish',
-        'Tajik',
-        'Tamil',
-        'Tatar',
-        'Telugu',
-        'Thai',
-        'Turkish',
-        'Turkmen',
-        'Ukrainian',
-        'Urdu',
-        'Uyghur',
-        'Uzbek',
-        'Vietnamese',
-        'Welsh',
-        'Xhosa',
-        'Yiddish',
-        'Yoruba',
-        'Zulu',
-    ];
+    const currentStyle = Appearance.getColorScheme();
+    const colors = currentStyle === 'dark' ? darkColors : lightColors;
+
+    const [lenguagesFilteredList, setLenguagesFilteredList] = React.useState(lenguagesListNames);
+
+    const [searchVisible, setSearchVisible] = React.useState(false);
+    const [searchQuery, setSearchQuery] = React.useState('');
+
+    const handleBack = () => {
+        if (searchVisible) {
+            handleSearchToggle();
+        } else {
+            navigation.goBack();
+        }
+    };
+
+    const handleClearIcon = () => {
+        setSearchQuery('');
+        filteredList('');
+    };
+
+    const handleSearchToggle = () => {
+        setSearchVisible(!searchVisible);
+        setSearchQuery('');
+    };
+
+    const filteredList = (query: string) => {
+        if (query === '') {
+            setLenguagesFilteredList(lenguagesListNames);
+        } else {
+            const filteredList = lenguagesListNames.filter((language) => {
+                return language.toLowerCase().includes(query.toLowerCase());
+            });
+            setLenguagesFilteredList(filteredList);
+        }
+
+        console.log(lenguagesFilteredList);
+    };
 
     return (
         <SafeAreaView style={styles.homeContainer}>
 
             <Appbar.Header
-                mode='large'
+                mode='center-aligned'
                 style={styles.appbarHeader}
             >
                 <Appbar.BackAction
-                    onPress={() => navigation.goBack()}
+                    onPress={handleBack}
+                    iconColor={colors.primaryText.color}
                 />
-                <Appbar.Content
-                    title={'Select a language'}
-                />
+                {
+                    searchVisible
+                        ? null
+                        : <Appbar.Content
+                            title={'Select a language'}
+                        />
+                }
+                {
+                    searchVisible ? (
+                        <Searchbar
+                            value={searchQuery}
+                            cursorColor={colors.primaryText.color}
+                            iconColor={colors.primaryText.color}
+                            inputStyle={{ color: colors.primaryText.color }}
+                            placeholder='Translate from...'
+                            placeholderTextColor={colors.secondaryText.color}
+                            style={styles.lenguagesListSearch}
+                            onChangeText={(query) => {
+                                setSearchQuery(query);
+                                filteredList(query);
+                            }}
+                            onClearIconPress={handleClearIcon}
+                        />
+                    )
+                        : <Appbar.Action
+                            icon={'magnify'}
+                            iconColor={colors.primaryText.color}
+                            onPress={() => handleSearchToggle()}
+                        />
+                }
             </Appbar.Header>
 
             <ScrollView style={{
@@ -169,7 +127,7 @@ export const LanguagesList: React.FC<LanguagesListProps> = () => {
                         /> : null
                 }
                 {
-                    lenguagesList.map((language, index) => (
+                    lenguagesFilteredList.map((language, index) => (
                         <LanguageListItem
                             key={index}
                             isOriginal={isOriginal}

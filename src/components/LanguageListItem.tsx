@@ -39,6 +39,11 @@ export const LanguageListItem: React.FC<LanguageListItemProps> = ({
             left={props =>
                 language === title ? <List.Icon {...props} icon='check' /> : null
             }
+            right={props =>
+                title === 'Detect language'
+                    ? <List.Icon {...props} icon='creation' />
+                    : null
+            }
             style={{
                 backgroundColor:
                     language === title
@@ -60,11 +65,11 @@ export const LanguageListItem: React.FC<LanguageListItemProps> = ({
                                 setTranslatedLanguage('Spanish');
                             }
                         } else {
-                            setTranslatedLanguage(originalLenguage);
+                            setTranslatedLanguage(originalLenguage)
                         }
                     }
                     setOriginalLanguage(title);
-
+                    
                 } else {
 
                     if (title === originalLenguage) {
