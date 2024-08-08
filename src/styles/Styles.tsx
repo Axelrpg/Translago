@@ -52,6 +52,12 @@ export const styles = StyleSheet.create({
         width: 100,
         padding: 10,
     },
+    lenguagesListSearch: {
+        backgroundColor: currentStyle === 'dark'
+            ? darkColors.primaryBackground.color
+            : lightColors.primaryBackground.color,
+        width: '87%',
+    },
     translatedText: {
         fontSize: 20,
         marginTop: 15,

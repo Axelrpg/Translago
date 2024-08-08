@@ -10,4 +10,7 @@ export const darkColors = StyleSheet.create({
     primaryText: {
         color: '#FFFFFF'
     },
+    secondaryText: {
+        color: '#A9A9A9'
+    },
 });

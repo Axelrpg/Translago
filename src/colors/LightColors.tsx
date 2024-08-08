@@ -10,4 +10,7 @@ export const lightColors = StyleSheet.create({
     primaryText: {
         color: '#000000',
     },
+    secondaryText: {
+        color: '#A9A9A9',
+    },
 });
