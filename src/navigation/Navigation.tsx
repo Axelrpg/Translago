@@ -20,7 +20,7 @@ export type RootStackParamList = {
         text: string;
         setText: (text: string) => void
     };
-    Translate: undefined;
+    Translate: undefined
 };
 
 const Stack = createStackNavigator<RootStackParamList>();

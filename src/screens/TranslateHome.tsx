@@ -1,12 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Appearance, Keyboard, SafeAreaView, View } from 'react-native';
+import { Appearance, Keyboard, View } from 'react-native';
 import { Appbar, Button, Divider, IconButton, Text, TextInput } from 'react-native-paper';
 import { API_KEY } from '../../config';
 import { TranslationInterface } from '../interfaces/TranslationInterface';
-import { AppbarComponent } from '../components/AppbarComponent';
 import { darkColors } from '../colors/DarkColors';
-import { useNavigation } from '@react-navigation/native';
+import { RouteProp, useNavigation, useRoute } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { RootStackParamList } from '../navigation/Navigation';
 import { getLanguageCode } from '../helpers/GetLanguageCode';
@@ -64,11 +63,13 @@ export const TranslateHome: React.FC = () => {
     };
 
     const swapLanguages = () => {
-        const original = originalLanguage;
-        const translated = translatedLanguage;
+        if (originalLanguage !== 'Detect language') {
+            const original = originalLanguage;
+            const translated = translatedLanguage;
 
-        setOriginalLanguage(translated);
-        setTranslatedLanguage(original);
+            setOriginalLanguage(translated);
+            setTranslatedLanguage(original);
+        }
     };
 
     useEffect(() => {
@@ -92,6 +93,13 @@ export const TranslateHome: React.FC = () => {
             <Appbar.Header
                 mode='center-aligned'
             >
+                {
+                    keyboardVisible && (
+                        <Appbar.BackAction
+                            onPress={() => Keyboard.dismiss()}
+                        />
+                    )
+                }
                 <Appbar.Content
                     title={'Translago'}
                 />
@@ -142,6 +150,9 @@ export const TranslateHome: React.FC = () => {
                 <View style={styles.homeSelectedLanguageContainer}>
                     <Button
                         mode='contained'
+                        labelStyle={{
+                            fontSize: originalLanguage === 'Detect language' ? 10 : 14
+                        }}
                         style={styles.homeSelectedLanguageButton}
                         textColor={colors.primaryText.color}
                         onPress={() => navigation.navigate('Languages', {
